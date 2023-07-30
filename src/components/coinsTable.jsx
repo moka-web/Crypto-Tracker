@@ -66,7 +66,7 @@ import { deepPurple, lime, purple,grey } from '@mui/material/colors'
                 <TableContainer  sx={{width:"100%"}}>
                     {coinlist.length == 0 ? (  <>
                         
-                        <h5>Loading...</h5>
+                        <h5>Searching for Cryptos...</h5>
                         <LinearProgress sx={{color:'gold'}} ></LinearProgress>
                         
                         </>) : 
