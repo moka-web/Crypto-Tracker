@@ -4,7 +4,7 @@ import { CoinList } from "../api/apiGecko"
 import { useContext, useEffect, useState } from "react"
 import CryptoCurrencyContext from "../cryptoContext"
 import { ThemeProvider } from '@emotion/react'
-import { Container, Typography, createTheme, TextField, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, LinearProgress, Pagination,makeStyles, CircularProgress} from '@mui/material'
+import { Container, Typography, createTheme, TextField, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, LinearProgress, Pagination,makeStyles, CircularProgress, Box} from '@mui/material'
 
 import { useNavigate } from 'react-router-dom'
 import { priceWithCommas } from './carousel'
@@ -54,25 +54,31 @@ import { deepPurple, lime, purple,grey } from '@mui/material/colors'
 
     }
 
-        
+        console.log(coinlist.length)    
     
   return (
     <>
         <ThemeProvider theme={theme}>
-            <Container sx={{textAlign:"center" }}>
+            <Box sx={{textAlign:"center", padding:"5%" }} xs={12} >
                 <Typography variant='h4' sx={{fontFamily:"Montserrat" , m:"2%" , fontWeight:"bold" }}> Crypto currency prices by market cap</Typography>
                 <TextField  focused  onChange={(e)=>setSearch(e.target.value)} sx={{  mt:5, mb:5, width:"100%" , height:40 }}  color='primary'  label="search"  variant='outlined' ></TextField>
                 
-                <TableContainer sx={{width:"100%"}}>
-                    {!coinlist ? (<CircularProgress sx={{backgroundColor:"gold"}} ></CircularProgress>) : 
+                <TableContainer  sx={{width:"100%"}}>
+                    {coinlist.length == 0 ? (  <>
+                        
+                        <h5>Loading...</h5>
+                        <LinearProgress sx={{color:'gold'}} ></LinearProgress>
+                        
+                        </>) : 
+                      
                     (<>
                     
-                    <Table>
+                    <Table xs={6}>
                         <TableHead sx={{backgroundColor:"gold"}}>
-                            <TableRow>
+                            <TableRow >
                               {["Coin" ,"Price","24h Change","Market Cap"].map((head)=>(
 
-                                <TableCell sx={{color:"black",fontWeight:"700",fontFamily:"Montserrat"}} key={head} align={head == "Coin"? "" : "right"}>{head}</TableCell>
+                                <TableCell  sx={{color:"black",fontWeight:"700",fontFamily:"Montserrat" , }} key={head} align={head == "Coin"? "" : "right"}>{head}</TableCell>
 
                               ))}
                             </TableRow>
@@ -83,13 +89,13 @@ import { deepPurple, lime, purple,grey } from '@mui/material/colors'
                             return(
                                 <>
                                 <TableRow sx={{}} key={row.name} onClick={()=>{navigate(`/coins/${row.id}`)}}>
-                                    <TableCell component="th" scope='row' sx={{display:"flex", gap:15 }}>
+                                    <TableCell component="th" scope='row' sx={{display:"flex", gap:1 }}>
                                         
                                         <div style={{display:"flex" , flexDirection:"column" }}>
                                         <img src={row?.image} alt={row.name} height="50" style={{marginBottom:10}} />
                                         <span style={{
                                             textTransform:"uppercase",
-                                            fontSize:22,
+                                            fontSize:20,
                                             color: "white"
                                         }}>
                                             {row.symbol}
@@ -101,8 +107,8 @@ import { deepPurple, lime, purple,grey } from '@mui/material/colors'
                                         </div>
 
                                     </TableCell>
-                                    <TableCell align='right' sx={{color:'white'}} > {symbol}{" "}{priceWithCommas(row.current_price.toFixed(2))} </TableCell>
-                                    <TableCell align='right' sx={{color:profit > 0 ? "rgb(14,203,129)" : "red" , fontWeight:"500"}}>{profit && "+"}{row.price_change_percentage_24h.toFixed(2)}%</TableCell>
+                                    <TableCell align='right' sx={{color:'white'}} > {symbol}{" "}{priceWithCommas(row.current_price.toFixed(1))} </TableCell>
+                                    <TableCell align='right' sx={{color:profit > 0 ? "rgb(14,203,129)" : "red" , fontWeight:"500"}}>{profit && "+"}{row.price_change_percentage_24h.toFixed(1)}%</TableCell>
                                     <TableCell align='right' sx={{color:"white"}}>{symbol}{row.market_cap.toString().slice(0,-6)}</TableCell>
                                 </TableRow>
                                 </>
@@ -120,7 +126,7 @@ import { deepPurple, lime, purple,grey } from '@mui/material/colors'
                             setPage(value)
                             window.scroll(0,450)
                         }} color='primary'  sx={{width:"100%" , display:"flex" , justifyContent:"center", mt:2 }}  count={(handleSearch()?.length/10).toFixed(0)}></Pagination>
-            </Container>
+            </Box>
         </ThemeProvider>
     </>
 
