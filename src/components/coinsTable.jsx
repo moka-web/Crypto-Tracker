@@ -4,7 +4,7 @@ import { CoinList } from "../api/apiGecko"
 import { useContext, useEffect, useState } from "react"
 import CryptoCurrencyContext from "../cryptoContext"
 import { ThemeProvider } from '@emotion/react'
-import { Container, Typography, createTheme, TextField, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, LinearProgress, Pagination,makeStyles} from '@mui/material'
+import { Container, Typography, createTheme, TextField, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, LinearProgress, Pagination,makeStyles, CircularProgress} from '@mui/material'
 
 import { useNavigate } from 'react-router-dom'
 import { priceWithCommas } from './carousel'
@@ -22,9 +22,13 @@ import { deepPurple, lime, purple,grey } from '@mui/material/colors'
     const [coinlist,setCoinlist] = useState([]);
 
    const getListOfCoins = async ()=>{
+
+
     await axios.get(CoinList(currency))
+
     .then(res=>setCoinlist(res.data))
     .catch(error=>console.log(error.message));
+
    }
 
    useEffect(()=>{
@@ -50,16 +54,17 @@ import { deepPurple, lime, purple,grey } from '@mui/material/colors'
 
     }
 
+        
     
   return (
     <>
         <ThemeProvider theme={theme}>
-            <Container sx={{textAlign:"center"}}>
+            <Container sx={{textAlign:"center" }}>
                 <Typography variant='h4' sx={{fontFamily:"Montserrat" , m:"2%" , fontWeight:"bold" }}> Crypto currency prices by market cap</Typography>
                 <TextField  focused  onChange={(e)=>setSearch(e.target.value)} sx={{  mt:5, mb:5, width:"100%" , height:40 }}  color='primary'  label="search"  variant='outlined' ></TextField>
                 
-                <TableContainer>
-                    {loading? (<LinearProgress sx={{backgroundColor:"gold"}} ></LinearProgress>) : 
+                <TableContainer sx={{width:"100%"}}>
+                    {!coinlist ? (<CircularProgress sx={{backgroundColor:"gold"}} ></CircularProgress>) : 
                     (<>
                     
                     <Table>
