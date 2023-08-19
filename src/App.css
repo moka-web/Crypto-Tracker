@@ -11,18 +11,19 @@
 
 a{
   text-decoration: none;
-  color: gold;
+  color: gold !important;
 
 }
 
-/* li{
-  color: white !important;
-} */
 
 /* text field y pagination modified classes */
 
 .css-1ci5905-MuiButtonBase-root-MuiPaginationItem-root{
   color: white !important;
+}
+
+li{
+  color: gold;
 }
 
 
@@ -35,8 +36,59 @@ a{
 }
 .css-15mpiwy{
   color: white;
-  
+
 }
 .css-1hu4ypv-MuiInputBase-root-MuiOutlinedInput-root {
   color: white !important;
+}
+
+
+
+
+@media (max-width: 480px){
+
+.responsive_coinPaige{
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.responsive_coinPaige div img{
+  display: block;
+  margin-left: 80px;
+  width: 200px;
+}
+
+.responsive_coinPaige div p{
+  width: 100% !important;
+  
+}
+
+
+.responsive_coinPaige div span{
+  width: 100%;
+}
+
+.responsive_description{
+  display: block;
+  width: 350px !important;
+  text-align: center;
+}
+
+/* typography coin page */
+
+.css-ag7rrr-MuiTypography-root{
+  font-size: 4vw !important;
+  margin: 5% !important;
+}
+
+.respnsive_data_market{
+  width: 100% !important;
+
+}
+
+.responsive_div_chart{
+  width: 100% !important;
+}
+
 }

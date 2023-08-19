@@ -35,41 +35,33 @@ export const CoinPage = () => {
 
 
   return (
-    <div style={{display:"flex", margin:"5%"}} >
-      <div style={{width:"40%"}} >
+    <div className="responsive_coinPaige" style={{display:"flex", padding:"5%"}} >
+      <div  className="respnsive_data_market" style={{width:"40%"}} >
         {!coin ? (<LinearProgress sx={{backgroundColor:"gold", margin:"0 auto"}}></LinearProgress>) : (
          <>
         <img src={coin?.image?.large} alt={coin?.name} />
-          <Typography>{coin?.name}</Typography>
-          <Typography>{ReactHtmlParser(coin?.description?.en.split(". ")[0])}</Typography>
+          <Typography  variant="h5">{coin?.name}</Typography>
+          <Typography className="responsive_description" variant="p">{ReactHtmlParser(coin?.description?.en.split(". ")[0])}</Typography>
           <span>
             <Typography variant="h5">
-              Rank :
+              Rank : {coin?.market_cap_rank}
             </Typography>
-            <Typography variant="h5">
-              {coin?.market_cap_rank}
+           
+          </span>
+          <span>
+            <Typography  variant="h5">
+              Current Price : {symbol}{priceWithCommas(coin?.market_data?.current_price[currency.toLowerCase()])} 
             </Typography>
           </span>
           <span>
             <Typography variant="h5">
-              Current Price :
-            </Typography>
-            <Typography variant="h5">
-               {symbol}{priceWithCommas(coin?.market_data?.current_price[currency.toLowerCase()])} 
-            </Typography>
-          </span>
-          <span>
-            <Typography variant="h5">
-             Market Cap :
-            </Typography>
-            <Typography variant="h5">
-               {symbol}{priceWithCommas(coin?.market_data?.market_cap[currency.toLowerCase()])} 
+             Market Cap : {symbol}{priceWithCommas(coin?.market_data?.market_cap[currency.toLowerCase()])} 
             </Typography>
           </span>
           </> 
         )}
       </div>
-      <div style={{width:"60%", padding:"5%"}}>
+      <div className="responsive_div_chart" style={{width:"60%", padding:"5%"}}>
         chart
         <CoinInfo id={id}></CoinInfo>
       </div>          
@@ -77,3 +69,4 @@ export const CoinPage = () => {
   )
 }
 
+ 

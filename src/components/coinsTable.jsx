@@ -125,7 +125,8 @@ import { deepPurple, lime, purple,grey } from '@mui/material/colors'
                         <Pagination  onChange={(_,value)=>{
                             setPage(value)
                             window.scroll(0,450)
-                        }} color='primary'  sx={{width:"100%" , display:"flex" , justifyContent:"center", mt:2 }}  count={(handleSearch()?.length/10).toFixed(0)}></Pagination>
+                        }} color='primary'  sx={{width:"100%" , display:"flex" , justifyContent:"center", mt:2 }}  count={(handleSearch()?.length/10).toFixed(0)}>    
+                        </Pagination>
             </Box>
         </ThemeProvider>
     </>
